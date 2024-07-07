@@ -2,8 +2,9 @@ import pygame
 from settings import * #імпортування папки "ssettings.py"
 from player import Player
 from sprite_objects import *
-from ray_casting import ray_casting
+from ray_casting import ray_casting_walls
 from drawing import Drawing
+from interaction import Interaction
 
 import math
 
@@ -18,8 +19,9 @@ sprites = Sprites()
 clock = pygame.time.Clock() 
 
 pygame.mouse.set_visible(False)
-player = Player()
+player = Player(sprites)
 drawing = Drawing(win,win_map)
+interaction = Interaction(player, sprites, drawing)
 
 run = True
 while run:
@@ -33,7 +35,7 @@ while run:
     win.fill(BLACK)
     
     drawing.background(player.angle)
-    walls = ray_casting(player, drawing.textures)
+    walls = ray_casting_walls(player, drawing.textures)
     drawing.world(walls + [obj.object_locate(player) for obj in sprites.list_of_objects ])
     drawing.fps(clock)
     drawing.mini_map(player)

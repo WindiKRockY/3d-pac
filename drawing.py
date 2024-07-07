@@ -47,5 +47,5 @@ class Drawing():
                                                                              map_y + 10 * math.sin(player.angle)))
         pygame.draw.circle(self.win_map, PURPLE, (int(map_x), int(map_y)) , 5 )
         for x , y in mini_map:
-            pygame.draw.rect(self.win_map,DARKBROWN, (x , y , MAP_TILE ,MAP_TILE))
+            pygame.draw.rect(self.win_map,DARKBROWN, (x , y -20 , MAP_TILE  ,MAP_TILE ))
         self.win.blit(self.win_map,MAP_POS)
