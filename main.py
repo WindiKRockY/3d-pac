@@ -1,15 +1,14 @@
 import pygame
-from settings import * #імпортування папки "ssettings.py"
+#from settings import * #імпортування папки "settings.py"
 from player import Player
 from sprite_objects import *
 from ray_casting import ray_casting_walls
 from drawing import Drawing
 from interaction import Interaction
 
-import math
-
 
 pygame.init()
+
 
 win = pygame.display.set_mode((WIDTH,HEIGHT))
 win_map = pygame.Surface((MINI_MAP_RES))

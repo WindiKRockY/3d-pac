@@ -39,8 +39,10 @@ def ray_casting_npc_player(npc_x, npc_y, blocked_doors, world_map, player_pos):
         y += dy * TILE
     return True
 
+
 class Interaction:
     def __init__(self, player, sprites, drawing):
         self.player = player
         self.sprites = sprites
         self.drawing = drawing
+        self.pain_sound = pygame.mixer.Sound('sound/pain.wav')

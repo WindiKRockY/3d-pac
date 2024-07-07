@@ -1,10 +1,11 @@
 import pygame
 from settings import *
 from collections import deque
-import math
+from ray_casting import mapping
+from numba.core import types
 from numba.typed import Dict
 from numba import int32
-from numba.core import types
+
 
 pygame.init()
 
@@ -105,6 +106,10 @@ class Sprites:
 # @property
 #     def sprite_shot(self):
 #         if player_pos.dete
+        
+    @property
+    def pos(self):
+        return (self.x, self.y)
         
 @property
 def blocked_doors(self):
@@ -237,3 +242,6 @@ class SpriteObject:
             self.animation_count = 0
         return sprite_object
                         
+    @property
+    def pos(self):
+        return (self.x, self.y)

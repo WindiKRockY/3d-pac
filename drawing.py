@@ -37,15 +37,15 @@ class Drawing():
         
     def fps(self,clock):
         display_fps = str(int(clock.get_fps()))
-        render = self.font.render(display_fps , 0 ,DARKORANGE)
+        render = self.font.render(display_fps , 0 ,GRAY)
         self.win.blit(render , FPS_POS)
         
     def mini_map(self,player):
         self.win_map.fill(BLACK)
         map_x , map_y = player.x // MAP_SCALE , player.y //MAP_SCALE
-        pygame.draw.line(self.win_map , YELLOW , (map_x , map_y) , (map_x + 10 * math.cos(player.angle),
+        pygame.draw.line(self.win_map , WHITE , (map_x , map_y) , (map_x + 10 * math.cos(player.angle),
                                                                              map_y + 10 * math.sin(player.angle)))
-        pygame.draw.circle(self.win_map, PURPLE, (int(map_x), int(map_y)) , 5 )
+        pygame.draw.circle(self.win_map, YELLOW, (int(map_x), int(map_y)) , 5 )
         for x , y in mini_map:
-            pygame.draw.rect(self.win_map,DARKBROWN, (x , y -20 , MAP_TILE  ,MAP_TILE ))
+            pygame.draw.rect(self.win_map,BLUE, (x , y , MAP_TILE  ,MAP_TILE ))
         self.win.blit(self.win_map,MAP_POS)

@@ -23,7 +23,7 @@ class Player:
 
     @property
     def collision_list(self):
-        return collision_walls + [pygame.Rect(*obj.pos, obj.side, obj.side) for obj in
+        return collision_walls + [pygame.Rect(*(obj.pos), obj.side, obj.side) for obj in
                                   self.sprites.list_of_objects if obj.blocked]
 
     def detect_collision(self, dx, dy):
@@ -53,9 +53,9 @@ class Player:
         self.x += dx
         self.y += dy    
     
-        def dead(self):
-            if sprites.detect_collison(player_pos):
-                player.kill()
+    # def dead(self):
+    #     if sprites.detect_collison(player_pos):
+    #         player.kill()
     def movement(self):
         self.keys_control()
         self.mouse_control()
