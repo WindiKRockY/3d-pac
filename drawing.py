@@ -14,6 +14,7 @@ class Drawing():
                         2 :pygame.image.load('images/ghost_wall.png').convert(),
                         'S' :pygame.image.load('images/sky.jpg').convert(),
                         'F' :pygame.image.load('images/floor.png').convert(),
+                        'C':pygame.image.load("sCoins.png").convert(),
                          }
         
     def background(self,angle):

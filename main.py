@@ -21,7 +21,7 @@ pygame.mouse.set_visible(False)
 player = Player(sprites)
 drawing = Drawing(win,win_map)
 interaction = Interaction(player, sprites, drawing)
-
+interaction.play_music()
 run = True
 while run:
     #Обробка подій на екрані 

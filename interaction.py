@@ -45,4 +45,46 @@ class Interaction:
         self.player = player
         self.sprites = sprites
         self.drawing = drawing
-        self.pain_sound = pygame.mixer.Sound('sound/pain.wav')
+        self.pain_sound = pygame.mixer.Sound('sound/pacman_eatghost.wav')
+        
+        def interaction_objects(self):
+            if self.player.shot :
+                for obj in sorted(self.sprites.list_of_objects, key=lambda obj: obj.distance_to_sprite):
+                    if obj.is_on_fire[1]:
+                        if obj.is_dead != 'immortal' and not obj.is_dead:
+                            if ray_casting_npc_player(obj.x, obj.y,
+                                                    self.sprites.blocked_doors,
+                                                    world_map, self.player.pos):
+                                if obj.flag == 'npc':
+                                    self.pain_sound.play()
+                                obj.is_dead = True
+                                obj.blocked = None
+                                self.drawing.shot_animation_trigger = False
+                        if obj.flag in {'door_h', 'door_v'} and obj.distance_to_sprite < TILE:
+                            obj.door_open_trigger = True
+                            obj.blocked = None
+                        break
+                    
+        def npc_action(self):
+            for obj in self.sprites.list_of_objects:
+                if obj.flag == 'npc' and not obj.is_dead:
+                    if ray_casting_npc_player(obj.x, obj.y,
+                                            self.sprites.blocked_doors,
+                                            world_map, self.player.pos):
+                        obj.npc_action_trigger = True
+                        self.npc_move(obj)
+                    else:
+                        obj.npc_action_trigger = False                        
+                            
+            
+    def npc_move(self, obj):
+        if abs(obj.distance_to_sprite) > TILE:
+            dx = obj.x - self.player.pos[0]
+            dy = obj.y - self.player.pos[1]
+            obj.x = obj.x + 1 if dx < 0 else obj.x - 1
+            obj.y = obj.y + 1 if dy < 0 else obj.y - 1
+            
+        def play_music(self):
+            pygame.mixer.init()
+            pygame.mixer.music.load('sound/pacman_chomp.wav')
+            pygame.mixer.music.play(10)

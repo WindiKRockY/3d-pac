@@ -15,6 +15,7 @@ class Player:
         self.side = 50
         self.rect = pygame.Rect(* player_pos , self.side ,self.side)
         #self.collision_list = collision_walls + self.collision_sprites
+        self.shot = False
        
         
     @property

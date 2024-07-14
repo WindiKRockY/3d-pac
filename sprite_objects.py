@@ -106,10 +106,11 @@ class Sprites:
 # @property
 #     def sprite_shot(self):
 #         if player_pos.dete
-        
+
     @property
-    def pos(self):
-        return (self.x, self.y)
+    def sprite_shot(self):
+        return min([obj.is_on_fire for obj in self.list_of_objects], default=(float('inf'), 0))
+    
         
 @property
 def blocked_doors(self):
@@ -200,6 +201,13 @@ class SpriteObject:
             return (self.distance_to_sprite, sprite, sprite_pos)
         else:
             return (False,)
+        
+    @property
+    def is_on_fire(self):
+        if CENTER_RAY - self.side // 2 < self.current_ray < CENTER_RAY + self.side // 2 and self.blocked:
+            return self.distance_to_sprite, self.proj_height
+        return float('inf'), None
+    
     
     def sprite_animation(self):
         if self.animation and self.distance_to_sprite < self.animation_dist:
@@ -211,6 +219,9 @@ class SpriteObject:
                     self.animation_count = 0
                 return sprite_object
         return self.object
+    @property
+    def pos(self):
+        return (self.x, self.y)
 
     def visible_sprite(self):
         if self.viewing_angles:
